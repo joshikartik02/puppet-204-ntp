@@ -1,0 +1,15 @@
+class ntp::params {
+  case $facts['operatingsystem'] {
+    'Debian', 'Ubuntu': {
+       $package_name = 'ntp'
+       $service_name = 'ntp'    
+       }
+     /^Redhat|CekartikntOS/: {
+       $package_name = 'ntp'
+       $service_name = 'ntpd'
+       }
+     default: {
+     fail("${facts['operatingsystem']} is not supported!")
+ }
+ }
+}
